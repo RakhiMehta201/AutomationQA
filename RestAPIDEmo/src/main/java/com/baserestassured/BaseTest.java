@@ -1,11 +1,21 @@
 package com.baserestassured;
 
 import io.restassured.RestAssured;
+import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import org.json.JSONObject;
+import org.testng.annotations.BeforeMethod;
 
 public class BaseTest {
+    protected RequestSpecification spec;
+    @BeforeMethod
+    public void setUp()
+    {
+        //Request Specification
+        spec = new RequestSpecBuilder().setBaseUri("https://restful-booker.herokuapp.com").build();
+    }
     protected Response createBookingMethod() {
         //Create JsonBody
         JSONObject body = new JSONObject();
@@ -21,7 +31,7 @@ public class BaseTest {
         body.put("additionalneeds","Baby crib");
 
         //Get Response
-        Response response = RestAssured.given().contentType(ContentType.JSON).body(body.toString()).post("https://restful-booker.herokuapp.com/booking");
+        Response response = RestAssured.given(spec).contentType(ContentType.JSON).body(body.toString()).post("/booking");
         return response;
     }
 }

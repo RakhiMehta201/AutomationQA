@@ -31,5 +31,8 @@
     <orderEntry type="library" name="Maven: io.rest-assured:xml-path:5.5.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.16.0" level="project" />
     <orderEntry type="library" name="Maven: org.json:json:20250107" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.19.0-rc2" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.19.0-rc2" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.19.0-rc2" level="project" />
   </component>
 </module>

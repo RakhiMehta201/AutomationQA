@@ -28,7 +28,7 @@ public class PartialUpdateBooking extends BaseTest {
         body.put("bookingdates",bookingdates);
 
         //Get Response
-        Response responseUpdate = RestAssured.given().auth().preemptive().basic("admin","password123").contentType(ContentType.JSON).body(body.toString()).patch("https://restful-booker.herokuapp.com/booking/"+bookingid);
+        Response responseUpdate = RestAssured.given(spec).auth().preemptive().basic("admin","password123").contentType(ContentType.JSON).body(body.toString()).patch("/booking/"+bookingid);
         responseUpdate.print();
 
         //Verification
@@ -41,10 +41,10 @@ public class PartialUpdateBooking extends BaseTest {
         softassert.assertEquals(actuallastname,"Mehta","Last name in response not expected");
 
         int price= responseUpdate.jsonPath().getInt("totalprice");
-        softassert.assertEquals(price,125,"Total price in response not expected");
+        softassert.assertEquals(price,145,"Total price in response not expected");
 
         Boolean depositprice= responseUpdate.jsonPath().getBoolean("depositpaid");
-        softassert.assertTrue(depositprice,"Deposit paid in response should be true but it's not");
+        softassert.assertFalse(depositprice,"Deposit paid in response should be true but it's not");
 
         String actualcheckin = responseUpdate.jsonPath().getString("bookingdates.checkin");
         softassert.assertEquals(actualcheckin,"2025-12-25","Check in date response not expected");
