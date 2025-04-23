@@ -17,14 +17,14 @@ public class DeleteBooking extends BaseTest {
         int bookingid = responseCreate.jsonPath().getInt("bookingid");
 
         //Get Response
-        Response responseDelete = RestAssured.given().auth().preemptive().basic("admin", "password123").contentType(ContentType.JSON).delete("https://restful-booker.herokuapp.com/booking/"+bookingid);
+        Response responseDelete = RestAssured.given(spec).auth().preemptive().basic("admin", "password123").contentType(ContentType.JSON).delete("/booking/"+bookingid);
         responseDelete.print();
 
         //Verification of status code
         Assert.assertEquals(responseDelete.statusCode(), 201, "Status code should be 200 but it's " + responseDelete.statusCode());
 
         //Get Response using some booking id as query parameter
-        Response response = RestAssured.get("https://restful-booker.herokuapp.com/booking/"+ bookingid);
+        Response response = RestAssured.given(spec).get("/booking/"+ bookingid);
         response.print();
 
         Assert.assertEquals(response.getBody().asString(),"Not Found","Body should not found , but it's there");

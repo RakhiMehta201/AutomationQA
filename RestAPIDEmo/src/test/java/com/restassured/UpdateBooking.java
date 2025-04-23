@@ -32,7 +32,7 @@ public class UpdateBooking extends BaseTest {
         body.put("additionalneeds","Baby crib");
 
         //Get Response
-        Response responseUpdate = RestAssured.given().auth().preemptive().basic("admin","password123").contentType(ContentType.JSON).body(body.toString()).put("https://restful-booker.herokuapp.com/booking/"+bookingid);
+        Response responseUpdate = RestAssured.given(spec).auth().preemptive().basic("admin","password123").contentType(ContentType.JSON).body(body.toString()).put("/booking/"+bookingid);
         responseUpdate.print();
 
         //Verification
